@@ -2,6 +2,10 @@
 
 some useful documentation
 
+## architecture
+
+architecture:<https://dydx.exchange/blog/v4-technical-architecture-overview>
+
 ## trading resources
 
 mainnet:
@@ -10,11 +14,12 @@ mainnet:
 - resources:<https://docs.dydx.trade/networks/network1/resources>
 - indexer_api:<https://docs.dydx.trade/developers/indexer/indexer_api>
 - trading API:<https://docs.dydx.trade/developers/clients/composite_client>
+- trading SDK Clients:<https://github.com/dydxprotocol/v4-clients>
 - trading demo:<https://github.com/greyireland/dydxv4-demo>
 
 testnet :
 
--official doc:<https://v4-teacher.vercel.app/>
+- official doc:<https://v4-teacher.vercel.app/>
 
 ## staking tutorial
 
