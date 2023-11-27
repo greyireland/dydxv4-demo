@@ -67,7 +67,7 @@ async function withdraw() {
     );
     console.log(tx.hash.toString());
 }
-async function placeOrder() {
+async function placeOrderBuy() {
 
     const compositeClient = await CompositeClient.connect(custom_network);
 
@@ -76,7 +76,7 @@ async function placeOrder() {
     const market = "BTC-USD"; // perpertual market id
     const type = OrderType.MARKET; // order type
     const side = OrderSide.BUY; // side of the order
-    const timeInForce = OrderTimeInForce.IOC; // UX TimeInForce
+    const timeInForce = OrderTimeInForce.GTT; // UX TimeInForce
     const execution = OrderExecution.DEFAULT;
     const price = 37406; // price of 30,000;
     const size = 0.001; // subticks are calculated by the price of the order
@@ -93,7 +93,41 @@ async function placeOrder() {
         size,
         clientId,
         timeInForce,
-        0,
+        60,
+        execution,
+        postOnly,
+        reduceOnly,
+        triggerPrice
+    );
+    console.log(tx.hash);
+}
+async function placeOrderSell() {
+
+    const compositeClient = await CompositeClient.connect(custom_network);
+
+    const subaccount = new SubaccountClient(wallet, 0);
+    const clientId = 1901901903; // set to a number, can be used by the client to identify the order
+    const market = "BTC-USD"; // perpertual market id
+    const type = OrderType.MARKET; // order type
+    const side = OrderSide.SELL; // side of the order
+    const timeInForce = OrderTimeInForce.FOK; // UX TimeInForce
+    const execution = OrderExecution.IOC;
+    const price = 37000; // price of 30,000;
+    const size = 0.001; // subticks are calculated by the price of the order
+    const postOnly = false; // If true, order is post only
+    const reduceOnly = false; // if true, the order will only reduce the position size
+    const triggerPrice = null; // required for conditional orders
+
+    const tx = await compositeClient.placeOrder(
+        subaccount,
+        market,
+        type,
+        side,
+        price,
+        size,
+        clientId,
+        timeInForce,
+        60,
         execution,
         postOnly,
         reduceOnly,
@@ -105,6 +139,6 @@ async function main() {
     await getAddress();
     // await getAccountBalances();
     // await withdraw();
-    // await placeOrder();
+    await placeOrderSell();
 }
 main();
